@@ -24,33 +24,67 @@
 $(document).ready(init);
 
 function init(){
-  $('#nums').click(grabNum);
+  $(document).keypress(printToScreen);
 }
 
 var numbers =[];
-
-function grabNum(){
-  var currNum = $('#input').val();
-  if (currNum === '='){
-    sumNums();
-  }else{
-    numbers.push(currNum);
-    var $div = $('<div>');
-    $div.text(currNum);
-    $('#numbers').append($div);
-    $('#input').val('');
-    $('#total').empty();
+function printToScreen(event){
+  switch (String.fromCharCode(event.which)){
+    case '+':
+      sumNums();
+      break;
+    case '-':
+      subNums();
+      break;
+    case '*':
+      multNums();
+      break;
+    
+    case '/':
+      divNums();
+      break;
+    
+    default:
+      numbers.push(String.fromCharCode(event.which));
+      var $div = $('<div>');
+      $div.text(numbers.slice(-1)[0]);
+      $('#numbers').append($div);
+      $('#total').empty();
+    }
   }
-}
 function sumNums(){
   var total = numbers.reduce(function(a, b){
     a = parseInt(a);
     b = parseInt(b);
     return a+b;
   });
+  printTotal(total);
+}
+function multNums(){
+  var total = numbers.reduce(function(a, b){
+    return a*b;
+  });
+  printTotal(total);
+}
+function subNums(){
+  var total = numbers.reduce(function(a, b){
+    a = parseInt(a);
+    b = parseInt(b);
+    return a-b;
+  });
+  printTotal(total);
+}
+function divNums(){
+  var total = numbers.reduce(function(a, b){
+    return a/b;
+  });
+printTotal(total);
+}
+function printTotal(total){
   var $div = $('<div>');
   $div.text(total);
   $('#total').append($div);
   $('#numbers').empty();
   $('#input').val('');
+  numbers = []
 }
