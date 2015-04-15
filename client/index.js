@@ -27,17 +27,14 @@ function init(){
   $('#nums').click(grabNum);
 }
 
-// function clickAdd(){
-//   $('#nums').click(grabNum);
-// }
 var numbers =[];
+
 function grabNum(){
   var currNum = $('#input').val();
   if (currNum === '='){
     sumNums();
   }else{
     numbers.push(currNum);
-    //var oldNum = $('#numbers').text();
     var $div = $('<div>');
     $div.text(currNum);
     $('#numbers').append($div);
