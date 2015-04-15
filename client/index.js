@@ -37,11 +37,12 @@ function grabNum(){
     sumNums();
   }else{
     numbers.push(currNum);
-    var oldNum = $('#numbers').text();
+    //var oldNum = $('#numbers').text();
     var $div = $('<div>');
     $div.text(currNum);
     $('#numbers').append($div);
     $('#input').val('');
+    $('#total').empty();
   }
 }
 function sumNums(){
@@ -53,4 +54,6 @@ function sumNums(){
   var $div = $('<div>');
   $div.text(total);
   $('#total').append($div);
+  $('#numbers').empty();
+  $('#input').val('');
 }
